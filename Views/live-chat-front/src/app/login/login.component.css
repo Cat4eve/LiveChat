@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;900&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+*:focus {
+    outline: none;
+}
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+    background: #ff5f6d;
+    background: -webkit-linear-gradient(
+        to right,
+        #ffc371,
+        #ff5f6d
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #ffc371,
+        #ff5f6d
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.wrapper{
+    margin-top: 200px;
+}
+
+.registration-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    border: none;
+    margin: 10px;
+    padding: 20px;
+    width: 35%;
+    border-radius: 20px;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+input:focus{
+    transform: scale(1.1);
+}
+input::placeholder {
+    padding: 30px;
+}
+
+.registration-title{
+    color: white;
+    font-size: 50px;
+}
+.registration-description{
+    color: white;
+    font-size: 30px;
+    letter-spacing: 1.4px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+:root {
+    --bg: #1a1e24;
+    --color: white;
+    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.button {
+    margin-top: 30px;
+    display: inline-block;
+    text-align: center;
+    background: white;
+    color: var(--bg);
+    font-weight: bold;
+    padding: 1.18em 1.32em 1.03em;
+    line-height: 1;
+    border-radius: 1em;
+    position: relative;
+    min-width: 8.23em;
+    text-decoration: none;
+    font-family: var(--font);
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.button:before,
+.button:after {
+    width: 4.4em;
+    height: 2.95em;
+    position: absolute;
+    content: "";
+    display: inline-block;
+    background: var(--color);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+    transform: scale(0);
+    z-index: -1;
+}
+
+.button:before {
+    top: -25%;
+    left: 20%;
+}
+
+.button:after {
+    bottom: -25%;
+    right: 20%;
+}
+
+.button:hover:before,
+.button:hover:after {
+    transform: none;
+}
+.button:hover{
+    transform: scale(1.2);
+}
