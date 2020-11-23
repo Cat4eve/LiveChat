@@ -11,15 +11,10 @@ if (isConnected) {
         return UserModel.create({
             username: username,
             email: email,
-            password: password
+            password: password,
+            history: {}
         });
     }
-
-    // app.use(async ctx => {
-    //     // ctx.body = 'Connected!';
-    //     let user1 = createUser('aaa', 'bbb', 'ccc')
-    //     console.log(user1);
-    // })
 
     app.use(function(req, res) {
         let user1 = createUser('aaa', 'bbb', 'ccc')
