@@ -16,6 +16,41 @@ if (isConnected) {
         });
     }
 
+    function getUserFromEmail(email) {
+        UserModel.findOne({
+            email: email
+        })
+        .then((result) => {
+            return result;
+        });
+    }
+
+    function getUserFromUsername(username) {
+        UserModel.findOne({
+            username: username
+        })
+        .then((result) => {
+            return result;
+        });
+    }
+
+    function getUserFromUserId(id) {
+        UserModel.findById(id)
+        .then((result) => {
+            return result;
+        }) 
+    }
+
+    // function getUser(user) {
+    //     UserModel.find({
+    //         username: user.username || '',
+    //         email: user.email || '',
+    //         id: user.id || ''
+    //     })
+    //     .then((result) => {
+    //         return result;
+    //     })
+    // }
 
     app.listen(PORT)
 }
