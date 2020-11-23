@@ -12,7 +12,7 @@ if (isConnected) {
             username: username,
             email: email,
             password: password,
-            history: {}
+            history: { }
         });
     }
 
