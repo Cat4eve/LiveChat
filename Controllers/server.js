@@ -16,9 +16,10 @@ if (isConnected) {
         });
     }
 
-    app.use(function(req, res) {
-        let user1 = createUser('aaa', 'bbb', 'ccc')
-        console.log(user1);
+    app.use(function(ctx) {
+        if (ctx.url == '/'){
+            ctx.redirect('/login');
+        }
       });
       
 
