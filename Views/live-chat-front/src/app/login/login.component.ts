@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validator, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +17,12 @@ export class LoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emailValidator(control: AbstractControl) {
+    if (control.value === '') return null
+    if (!control.value.includes('@')) return null
+    
   }
 
   loginSubmit(): void {
