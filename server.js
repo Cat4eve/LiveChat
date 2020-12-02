@@ -7,6 +7,10 @@ if (isConnected) {
 
     const app = new koa();
 
+    // app.use(ctx => {
+    //     ctx.body = 'works!'
+    // })
+
 
 
     app.listen(PORT)
