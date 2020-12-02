@@ -2,28 +2,27 @@
 <div class="wrapper">
   <h1 class="registration-title">Log in</h1>
   <p class="registration-description">to join to us.</p>
-  <form action="register" class="registration-wrapper" [formGroup]="_login">
+  <form action="register" class="registration-wrapper" [formGroup]="_login" (ngSubmit)="loginSubmit()" #form="ngForm">
       <input
           type="text"
-          placeholder="Email or Nickname"
+          placeholder="Email"
           class="reg-input-email"
-          formControlName="_emailOrUsername"
+          formControlName="_email"
       />
       <input
-          type="text"
+          type="password"
           placeholder="Password"
           class="reg-input-password"
           formControlName="_password"
       />
-      <a class="button" (click)="loginSubmit()">Login!</a>
+      <button [disabled]="_login.invalid" type="submit" class="button">{{!_login.invalid}}</button>
   </form>
-  <svg
+  <!-- <svg
       style="visibility: hidden; position: absolute"
       width="0"
       height="0"
       xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-  >
+      version="1.1">
       <defs>
           <filter id="goo">
               <feGaussianBlur
@@ -44,5 +43,5 @@
               />
           </filter>
       </defs>
-  </svg>
+  </svg> -->
 </div>
