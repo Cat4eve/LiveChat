@@ -27,6 +27,11 @@ UserModel.getUserByEmail = (email)=> {
         email: email
     })
 }
+UserModel.getUserByUsername = (username)=> {
+    return UserModel.findOne({
+        email: username
+    })
+}
 
 
 module.exports = UserModel;

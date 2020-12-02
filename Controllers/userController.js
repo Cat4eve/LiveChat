@@ -9,6 +9,13 @@ class UserController {
         ctx.body = result;
         ctx.status = 200;
     }
+
+    async getUserByUsername(ctx, next) {
+        const result = await userModel.getUserByUsername(ctx.params.username);
+        if (!result) ctx.throw(500, 'User Not Found');
+        ctx.body = result;
+        ctx.status = 200;
+    }
 }
 
 module.exports = new UserController();
