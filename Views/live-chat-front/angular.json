@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "live-chat-front"
+  "defaultProject": "live-chat-front",
+  "cli": {
+    "analytics": false
+  }
 }

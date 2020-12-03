@@ -72,7 +72,6 @@ input::placeholder {
     display: inline-block;
     text-align: center;
     background: white;
-    color: var(--bg);
     font-weight: bold;
     padding: 1.18em 1.32em 1.03em;
     line-height: 1;
@@ -80,9 +79,9 @@ input::placeholder {
     position: relative;
     min-width: 8.23em;
     text-decoration: none;
-    font-family: var(--font);
     font-size: 1.25rem;
     transition: all 0.3s ease;
+    border:none;
 }
 
 .button:hover{
