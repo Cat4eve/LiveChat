@@ -7,58 +7,15 @@ if (isConnected) {
 
     const app = new koa();
 
-    // app.use(ctx => {
-    //     ctx.body = 'works!'
-    // })
-
+    app.use(async (ctx, next) => {
+        ctx.set('Access-Control-Allow-Origin', '*');
+        ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+        await next();
+    })
 
 
     app.listen(PORT)
     app.use(userRouter.routes());
     app.use(userRouter.allowedMethods());
-
-    // function createUser(username, email, password) {
-    //     return UserModel.create({
-    //         username: username,
-    //         email: email,
-    //         password: password,
-    //         history: { }
-    //     });
-    // }
-
-    // function getUserFromEmail(email) {
-    //     UserModel.findOne({
-    //         email: email
-    //     })
-    //     .then((result) => {
-    //         return result;
-    //     });
-    // }
-
-    // function getUserFromUsername(username) {
-    //     UserModel.findOne({
-    //         username: username
-    //     })
-    //     .then((result) => {
-    //         return result;
-    //     });
-    // }
-
-    // function getUserFromUserId(id) {
-    //     UserModel.findById(id)
-    //     .then((result) => {
-    //         return result;
-    //     }) 
-    // }
-
-    // function getUser(user) {
-    //     UserModel.find({
-    //         username: user.username || '',
-    //         email: user.email || '',
-    //         id: user.id || ''
-    //     })
-    //     .then((result) => {
-    //         return result;
-    //     })
-    // }
 }

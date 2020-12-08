@@ -1,3 +1,4 @@
+import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     _password: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
   }) 
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -45,22 +46,15 @@ export class LoginComponent implements OnInit {
 
   loginSubmit(): void {
     if(this.isEmailTrue && this.isPasswordTrue){
-    //@ts-ignore
-     swal({
-        title: "Good job!",
-        text: "You are Loggined!",
-        icon: "success",
-        button: "Aww yiss!",
-      });
+      this.authService.getUsersFromEmail(this._login.get('_email').value).subscribe((value) => console.log(value));
     }else{
-    //@ts-ignore
-      swal({
+    //@ts-ignore 
+      swal({ 
         title: "You cant Login",
-        text: "Enter correct email and password for login",
+        text: "Enter correct email and password for Login!",
         icon: "warning",
         dangerMode: true,
       })
   }
   }
-
 }
