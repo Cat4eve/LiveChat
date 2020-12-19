@@ -23,9 +23,14 @@ const UserSchema = new Schema({
 const UserModel = mongoose.model('userschemas', UserSchema);
 
 UserModel.getUserByEmail = (email)=> {
-    return UserModel.findOne({
-        email: email
-    })
+    try {
+        return UserModel.findOne({
+            email: email
+        })
+    } catch (e) {
+        return false
+    }
+    
 }
 UserModel.getUserByUsername = (username)=> {
     return UserModel.findOne({

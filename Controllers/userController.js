@@ -4,8 +4,11 @@ class UserController {
     constructor(){ }
 
     async getUserByEmail(ctx, next) {
+        ctx.set('Access-Control-Allow-Origin', '*');
+        ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
         const result = await userModel.getUserByEmail(ctx.params.email);
-        if (!result) ctx.throw(500, 'User Not Found');
+        //if (!result) ctx.throw(500, 'User Not Found');
         ctx.body = result;
         ctx.status = 200;
     }
@@ -22,6 +25,10 @@ class UserController {
         if (!result) ctx.throw(500, 'User Not Found');
         ctx.body = result;
         ctx.status = 200;
+    }
+
+    async postRegistrationUser(ctx, next) {
+        console.log('aa');
     }
 }
 

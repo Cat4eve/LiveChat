@@ -10,9 +10,9 @@ import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validator
 })
 export class RegComponent{
   isEmailTrue: boolean;
-  isPasswordTrue: any; 
+  isPasswordTrue: any;
   isCorrect: any;
-  
+
   regWord = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   _registration = new FormGroup({
@@ -42,12 +42,14 @@ export class RegComponent{
     };
   }
 
-  regSubmit():void {
+  regSubmit():boolean {
+
     this.isCorrect = this.isPasswordTrue && this.isEmailTrue;
-    if(this.isCorrect) {
-      if (!this.authService.getUsersFromEmail(this._login.get('_email').value)) {
-        
-      }
-    }
+    if (!this.isCorrect) return false;
+    this.authService.getUserFromEmail(this._registration.get('_email').value).subscribe(value => {
+      if (value != false) this.isEmailTrue = false;
+    });
+    if (!this.isEmailTrue) return false;
+    this.authService.postFullInfo({username: this._registration.get('_username'), email: this._registration.get('_email'), password: this._registration.get('_password')})
   }
 }
