@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegComponent } from './reg/reg.component';
  
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
-    LoginComponent
-  ],
+    LoginComponent,
+    RegComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

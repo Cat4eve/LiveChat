@@ -3,27 +3,26 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-reg',
+  templateUrl: './reg.component.html',
+  styleUrls: ['./reg.component.css'],
   encapsulation: ViewEncapsulation.None
-}) 
-export class LoginComponent implements OnInit {
+})
+export class RegComponent{
   isEmailTrue: boolean;
   isPasswordTrue: any; 
   isCorrect: any;
-
+  
   regWord = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-  _login = new FormGroup({
+  _registration = new FormGroup({
+    _username: new FormControl('', [Validators.required]),
     _email: new FormControl('', [Validators.required, this.emailValidator(this.regWord)]),
     _password: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
-  }) 
+    _password2: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
+  })
 
   constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
 
   emailValidator(regex: RegExp): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} | null => {
@@ -43,17 +42,12 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  loginSubmit(): void {
-    if(this.isEmailTrue && this.isPasswordTrue){
-      this.authService.getUsersFromEmail(this._login.get('_email').value).subscribe((value) => console.log(value));
-    }else{
-    //@ts-ignore 
-      swal({ 
-        title: "You cant Login",
-        text: "Enter correct email and password for Login!",
-        icon: "warning",
-        dangerMode: true,
-      })
-  }
+  regSubmit():void {
+    this.isCorrect = this.isPasswordTrue && this.isEmailTrue;
+    if(this.isCorrect) {
+      if (!this.authService.getUsersFromEmail(this._login.get('_email').value)) {
+        
+      }
+    }
   }
 }

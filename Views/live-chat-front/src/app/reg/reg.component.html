@@ -1,0 +1,33 @@
+<!-- <link rel="stylesheet" href="login.component.css"> -->
+<div class="wrapper">
+  <h1 class="registration-title">Registration</h1>
+  <p class="registration-description">register to use our app.</p>
+  <form action="register" class="registration-wrapper" (ngSubmit)="regSubmit()" [formGroup]="_registration" #form="ngForm">
+      <input
+          type="text"
+          placeholder="Username"
+          class="reg-input-email"
+          formControlName="_username"
+      />
+      <input
+          type="text"
+          placeholder="Email"
+          class="reg-input-email"
+          formControlName="_email"
+      />
+      <input
+          type="password"
+          placeholder="Password"
+          class="reg-input-password"
+          formControlName="_password"
+      />
+      <input
+          type="password"
+          placeholder="Repeat password"
+          class="reg-input-password"
+          formControlName="_password2"
+      />
+      <button class="button">Registrate</button>
+  </form>
+ 
+</div>
