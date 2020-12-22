@@ -14,6 +14,10 @@ const UserSchema = new Schema({
         required: true,
         type: String
     },
+    passwordLength: {
+        required: false,
+        type: Number
+    },
     history: {
         required: false,
         type: Object
@@ -23,14 +27,9 @@ const UserSchema = new Schema({
 const UserModel = mongoose.model('userschemas', UserSchema);
 
 UserModel.getUserByEmail = (email)=> {
-    try {
-        return UserModel.findOne({
-            email: email
-        })
-    } catch (e) {
-        return false
-    }
-    
+    return UserModel.findOne({
+        email: email
+    });
 }
 UserModel.getUserByUsername = (username)=> {
     return UserModel.findOne({
@@ -40,6 +39,11 @@ UserModel.getUserByUsername = (username)=> {
 
 UserModel.getUserById = (id)=> {
     return UserModel.findById(id)
+}
+
+UserModel.addUser = (userObject, len)=> {
+    let user = new UserModel({username: userObject.username, email: userObject.email, password: userObject.password, passwordLength: len, history: []});
+    user.save();
 }
 
 module.exports = UserModel;

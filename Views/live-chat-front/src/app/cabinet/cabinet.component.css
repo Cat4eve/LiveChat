@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;900&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+*:focus {
+    outline: none;
+}
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+    background: #ff5f6d;
+    background: -webkit-linear-gradient(
+        to right,
+        #ffc371,
+        #ff5f6d
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #ffc371,
+        #ff5f6d
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.wrapper{
+    margin-top: 200px;
+}

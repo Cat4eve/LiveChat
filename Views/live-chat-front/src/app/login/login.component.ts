@@ -1,3 +1,7 @@
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { UserService } from './../user.service';
+import { Observable, Observer } from 'rxjs';
 import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
@@ -9,51 +13,65 @@ import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validator
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
-  isEmailTrue: boolean;
-  isPasswordTrue: any;
-  isCorrect: any;
+
+  isEmailExists: boolean;
 
   regWord = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   _login = new FormGroup({
-    _email: new FormControl('', [Validators.required, this.emailValidator(this.regWord)]),
-    _password: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
+    _email: new FormControl(''),
+    _password: new FormControl(''),
   })
 
-  constructor(private authService: AuthService) { }
+  constructor(private _userService: UserService , private _authService: AuthService, private _router: Router) { }
 
   ngOnInit(): void {
   }
 
-  emailValidator(regex: RegExp): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const forbidden = regex.test(control.value);
-      this.isEmailTrue = forbidden;
-      return forbidden ? {forbiddenName: {value: control.value}} : null;
-    };
-  }
+  // emailValidator(regex: RegExp): ValidatorFn {
+  //   return (control: AbstractControl): {[key: string]: any} | null => {
+  //     const forbidden = regex.test(control.value);
+  //     this.isEmailTrue = forbidden;
+  //     return forbidden ? {forbiddenName: {value: control.value}} : null;
+  //   };
+  // }
 
-  passwordValidator(regex: RegExp): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
-      if (!control.value) {
-        return null;
-      }
-      this.isPasswordTrue = regex.test(control.value);
-      return this.isPasswordTrue;
-    };
-  }
+  // passwordValidator(regex: RegExp): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } => {
+  //     if (!control.value) {
+  //       return null;
+  //     }
+  //     this.isPasswordTrue = regex.test(control.value);
+  //     return this.isPasswordTrue;
+  //   };
+  // }
+
+  // accValidation(): any {
+  //   return .pipe(
+  //     map(value => {
+  //       if (value == false)
+  //         return this.isEmailExists = false;
+  //       this.isEmailExists = true;
+  //   }))
+  // }
 
   loginSubmit(): void {
-    if(this.isEmailTrue && this.isPasswordTrue){
-      this.authService.getUserFromEmail(this._login.get('_email').value).subscribe((value) => console.log(value));
-    }else{
-    //@ts-ignore
+    this._userService.getUserFromEmail(this._login.get('_email').value).subscribe(value => {
+      if (value == false) this.isEmailExists = false;
+      else this.isEmailExists = true;
+
+      if (this.isEmailExists) {
+        this._authService.logIn(this._login.get('_email').value);
+        this._router.navigate(['/cabinet']);
+        return
+      }
+      //@ts-ignore
       swal({
         title: "You cant Login",
         text: "Enter correct email and password for Login!",
         icon: "warning",
         dangerMode: true,
-      })
-  }
+      });
+    })
   }
 }

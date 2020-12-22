@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
@@ -22,7 +23,7 @@ export class RegComponent{
     _password2: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
   })
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private userService: UserService) { }
 
   emailValidator(regex: RegExp): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} | null => {
@@ -42,14 +43,29 @@ export class RegComponent{
     };
   }
 
-  regSubmit():boolean {
-
+  regValidation():boolean {
     this.isCorrect = this.isPasswordTrue && this.isEmailTrue;
     if (!this.isCorrect) return false;
-    this.authService.getUserFromEmail(this._registration.get('_email').value).subscribe(value => {
-      if (value != false) this.isEmailTrue = false;
+    this.userService.getUserFromEmail(this._registration.get('_email').value).subscribe(value => {
+      if (value != false) {
+        this.isEmailTrue = false;
+        return false;
+      }
     });
-    if (!this.isEmailTrue) return false;
-    this.authService.postFullInfo({username: this._registration.get('_username'), email: this._registration.get('_email'), password: this._registration.get('_password')})
+    return true;
+  }
+
+  regSubmit():boolean {
+    if (!this.regValidation()) {
+      //@ts-ignore
+      swal({
+        title: "You cant Login",
+        text: "Enter correct email and password for Login!",
+        icon: "warning",
+        dangerMode: true,
+      });
+      return false;
+    }
+    return this.userService.postFullInfo({username: this._registration.get('_username'), email: this._registration.get('_email'), password: this._registration.get('_password')})
   }
 }

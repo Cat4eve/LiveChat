@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { URL } = require('./config.json')
+const { MongoURL } = require('./config.json')
 
 mongoose.connect(URL, {
     useNewUrlParser: true,

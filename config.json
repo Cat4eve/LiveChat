@@ -1,4 +1,5 @@
 {
     "PORT": 3000,
-    "URL": "mongodb+srv://ADMLike:jhgsdfewqpqw5821@cluster0.ixuxo.mongodb.net/LiveChat?retryWrites=true&w=majority"
+    "URL": "http://localhost:3000",
+    "MongoURL": "mongodb+srv://ADMLike:jhgsdfewqpqw5821@cluster0.ixuxo.mongodb.net/LiveChat?retryWrites=true&w=majority"
 }
