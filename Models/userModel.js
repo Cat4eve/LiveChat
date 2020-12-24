@@ -18,6 +18,10 @@ const UserSchema = new Schema({
         required: false,
         type: Number
     },
+    online: {
+        required: false,
+        type: Number
+    },
     history: {
         required: false,
         type: Object
@@ -41,8 +45,15 @@ UserModel.getUserById = (id)=> {
     return UserModel.findById(id)
 }
 
+UserModel.compareEmailAndPassword = (email, password)=> {
+    return UserModel.findOne({
+        email: email,
+        password: password
+    })
+}
+
 UserModel.addUser = (userObject, len)=> {
-    let user = new UserModel({username: userObject.username, email: userObject.email, password: userObject.password, passwordLength: len, history: []});
+    let user = new UserModel({username: userObject.username, email: userObject.email, password: userObject.password, passwordLength: len, online: 1, history: []});
     user.save();
 }
 

@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   // }
 
   loginSubmit(): void {
-    this._userService.getUserFromEmail(this._login.get('_email').value).subscribe(value => {
+    this._userService.compareEmailAndPassword(this._login.get('_email').value, this._login.get('_password').value).subscribe(value => {
       if (value == false) this.isEmailExists = false;
       else this.isEmailExists = true;
 

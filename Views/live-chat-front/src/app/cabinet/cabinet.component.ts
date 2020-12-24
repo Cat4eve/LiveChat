@@ -14,7 +14,6 @@ export class CabinetComponent implements OnInit {
   }
 
   leaveAcc(): void {
-    localStorage.removeItem('email');
     this._authService.logOut();
   }
 

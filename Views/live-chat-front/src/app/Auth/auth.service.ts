@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private _router: Router) { }
+  constructor(private _router: Router) { }
 
   isLogged() {
     return !!localStorage.getItem('email');
@@ -20,6 +19,7 @@ export class AuthService {
 
   logIn(email) {
     localStorage.setItem('email', email);
+    this._router.navigate(['/cabinet']);
   }
 
 }

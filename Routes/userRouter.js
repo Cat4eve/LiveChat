@@ -7,6 +7,7 @@ let koaBody = require('koa-body');
 userRouter.get('/users/email/:email', userController.getUserByEmail);
 userRouter.get('/users/username/:username', userController.getUserByUsername)
 userRouter.get('/users/id/:id', userController.getUserById)
+userRouter.get('/users/emailandpassword', userController.compareEmailAndPassword)
 userRouter.post('/registration', koaBody(), userController.postRegistrationUser);
 // userRouter.get('/register?username=')
 // userRouter.get('/users', ()=>{console.log('user connects');})

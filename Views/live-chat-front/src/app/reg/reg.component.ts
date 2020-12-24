@@ -19,7 +19,7 @@ export class RegComponent{
   _registration = new FormGroup({
     _username: new FormControl('', [Validators.required]),
     _email: new FormControl('', [Validators.required, this.emailValidator(this.regWord)]),
-    _password: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
+    _password: new FormControl(''),
     _password2: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
   })
 
@@ -38,7 +38,7 @@ export class RegComponent{
       if (!control.value) {
         return null;
       }
-      this.isPasswordTrue = regex.test(control.value);
+      this.isPasswordTrue = regex.test(control.value) && (control.value == this._registration.get('_password').value);
       return this.isPasswordTrue;
     };
   }
@@ -66,6 +66,14 @@ export class RegComponent{
       });
       return false;
     }
-    return this.userService.postFullInfo({username: this._registration.get('_username'), email: this._registration.get('_email'), password: this._registration.get('_password')})
+
+     this.userService.postFullInfo({username: this._registration.get('_username'), email: this._registration.get('_email'), password: this._registration.get('_password')});
+     //@ts-ignore
+     swal({
+      title: "Successful registration",
+      text: "Now you are the part of this site!",
+      icon: "success",
+    });
+     return true;
   }
 }
