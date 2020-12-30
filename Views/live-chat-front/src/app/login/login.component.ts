@@ -56,12 +56,15 @@ export class LoginComponent implements OnInit {
   // }
 
   loginSubmit(): void {
-    this._userService.compareEmailAndPassword(this._login.get('_email').value, this._login.get('_password').value).subscribe(value => {
+    this._userService.compareEmailAndPassword(
+      this._login.get('_email').value,
+      this._login.get('_password').value).subscribe(value => {
+      console.log(value);
       if (value == false) this.isEmailExists = false;
       else this.isEmailExists = true;
 
       if (this.isEmailExists) {
-        this._authService.logIn(this._login.get('_email').value);
+        this._authService.logIn();
         this._router.navigate(['/cabinet']);
         return
       }

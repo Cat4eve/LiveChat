@@ -8,7 +8,8 @@ const UserSchema = new Schema({
     },
     email: {
         required: true,
-        type: String
+        type: String,
+        unique: true
     },
     password: {
         required: true,
@@ -52,9 +53,14 @@ UserModel.compareEmailAndPassword = (email, password)=> {
     })
 }
 
+UserModel.getAllUsers = ()=> {
+    return UserModel.find({});
+}
+
 UserModel.addUser = (userObject, len)=> {
     let user = new UserModel({username: userObject.username, email: userObject.email, password: userObject.password, passwordLength: len, online: 1, history: []});
-    user.save();
+    return user.save();
+    //return user;
 }
 
 module.exports = UserModel;

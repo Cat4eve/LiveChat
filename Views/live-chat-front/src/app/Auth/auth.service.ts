@@ -9,16 +9,16 @@ export class AuthService {
   constructor(private _router: Router) { }
 
   isLogged() {
-    return !!localStorage.getItem('email');
+    return !!localStorage.getItem('online');
   }
 
   logOut() {
-    localStorage.removeItem('email');
+    localStorage.removeItem('online');
     this._router.navigate(['/login']);
   }
 
-  logIn(email) {
-    localStorage.setItem('email', email);
+  logIn() {
+    localStorage.setItem('online', '1');
     this._router.navigate(['/cabinet']);
   }
 

@@ -48,10 +48,11 @@ export class RegComponent{
     if (!this.isCorrect) return false;
     this.userService.getUserFromEmail(this._registration.get('_email').value).subscribe(value => {
       if (value != false) {
+        console.log(value);
         this.isEmailTrue = false;
-        return false;
       }
     });
+    if (!this.isEmailTrue) return false;
     return true;
   }
 
@@ -67,13 +68,32 @@ export class RegComponent{
       return false;
     }
 
-     this.userService.postFullInfo({username: this._registration.get('_username'), email: this._registration.get('_email'), password: this._registration.get('_password')});
-     //@ts-ignore
-     swal({
-      title: "Successful registration",
-      text: "Now you are the part of this site!",
-      icon: "success",
-    });
+     this.userService.postFullInfo({
+       username: this._registration.get('_username').value,
+       email: this._registration.get('_email').value,
+       password: this._registration.get('_password').value
+      }).subscribe(result=> {
+        if (!result.error) {
+          this.authService.logIn();
+          //@ts-ignore
+          swal({
+            title: "Successful registration",
+            text: "Now you are the part of this site!",
+            icon: "success",
+          });
+        }
+        else {
+          if (result.error == 'Dublication error') {
+          //@ts-ignore
+          swal({
+            title: "You cant Registrate",
+            text: "Login you write already exists, please write another one!",
+            icon: "warning",
+            dangerMode: true,
+          });
+        }}
+      });
+
      return true;
   }
 }

@@ -8,7 +8,7 @@ import { URL } from './../../../../config.json';
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -32,8 +32,6 @@ export class UserService {
   }
 
   postFullInfo(userObject: any): any{
-    this.authService.logIn(userObject.email);
     return this.http.post(`${URL}/registration`, userObject);
   }
-
 }

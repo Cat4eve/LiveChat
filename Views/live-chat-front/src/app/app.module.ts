@@ -11,6 +11,11 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegComponent } from './reg/reg.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserTableComponent } from './user-table/user-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -18,14 +23,19 @@ import { CabinetComponent } from './cabinet/cabinet.component';
     AppComponent,
     LoginComponent,
     RegComponent,
-    CabinetComponent
+    CabinetComponent,
+    UserTableComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [AuthService, LoginGuardGuard],
   bootstrap: [AppComponent]
