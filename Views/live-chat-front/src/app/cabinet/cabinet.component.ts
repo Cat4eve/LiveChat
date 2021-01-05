@@ -1,10 +1,11 @@
 import { AuthService } from './../Auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-cabinet',
   templateUrl: './cabinet.component.html',
-  styleUrls: ['./cabinet.component.css']
+  styleUrls: ['./cabinet.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CabinetComponent implements OnInit {
 

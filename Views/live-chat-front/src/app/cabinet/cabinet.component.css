@@ -6,4 +6,36 @@
 *:focus {
     outline: none;
 }
+body {
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  background-color: aqua;
+  background: #ff5f6d;
+  background: -webkit-linear-gradient(
+      to right,
+      #3498db,
+      #16a085
+  );
+  background: linear-gradient(
+      to right,
+      #3498db,
+      #16a085
+  );
+}
+
+.wrapper {
+  width: 70%;
+}
+
+.personal {
+  margin-top: 20px;
+}
+
+.logout_btn {
+  width: 200px;
+  height: 60px;
+  border-radius: 20px;
+  border: 0.5px solid black;
+}
 

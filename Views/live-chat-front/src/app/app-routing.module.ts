@@ -9,7 +9,9 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegComponent },
-  { path: 'cabinet', component: CabinetComponent, canActivate: [LoginGuardGuard]},
+  { path: 'cabinet', component: CabinetComponent, canActivate: [LoginGuardGuard], children: [
+    {path: 'chat'}
+  ]},
   { path: '', redirectTo: 'cabinet', pathMatch: 'full' },
   { path: '**', redirectTo: 'cabinet', pathMatch: 'full' }
 ];

@@ -9,11 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@angular/cli": "^11.0.5",
     "@koa/router": "^10.0.0",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
-    "mongoose": "^5.11.8",
+    "mongoose": "^5.11.10",
     "nodemon": "^2.0.6",
+    "socket.io": "^3.0.4",
     "tslib": "^2.0.3"
   }
 }

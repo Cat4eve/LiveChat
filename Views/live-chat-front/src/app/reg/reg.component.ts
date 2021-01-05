@@ -1,7 +1,7 @@
 import { UserService } from './../user.service';
 import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, NgForm, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reg',
@@ -87,7 +87,7 @@ export class RegComponent{
           //@ts-ignore
           swal({
             title: "You cant Registrate",
-            text: "Login you write already exists, please write another one!",
+            text: "Email you write already exists, please write another one!",
             icon: "warning",
             dangerMode: true,
           });

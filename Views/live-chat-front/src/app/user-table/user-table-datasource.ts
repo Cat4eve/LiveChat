@@ -15,6 +15,11 @@ export interface UserTableItem {
 const EXAMPLE_DATA: UserTableItem[] = [
   {online: 'online', username: 'Cat4er', email: 'Cat4er@mail.ru'},
   {online: 'offline', username: 'Dasha', email: 'Dasha@gmail.com'},
+  {online: 'offline', username: 'Artem', email: 'Artem@gmail.com'},
+  {online: 'online', username: 'Maksim', email: 'Max@mail.com'},
+  {online: 'offline', username: 'Alina', email: 'Alina@gmail.com'},
+  {online: 'online', username: 'Vlad', email: 'Vlad@gmail.com'},
+  {online: 'online', username: 'Gosha', email: 'Gosha@gmail.com'},
 ];
 
 /**
