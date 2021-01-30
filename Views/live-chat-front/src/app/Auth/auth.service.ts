@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private _router: Router) { }
 
   isLogged() {
-    return !!localStorage.getItem('online');
+    return !!localStorage.getItem('user');
   }
 
   logIn(user) {
@@ -20,6 +20,14 @@ export class AuthService {
   logOut() {
     localStorage.removeItem('user');
     this._router.navigate(['/login']);
+  }
+
+  setPlace(location: string) {
+    localStorage.setItem('page', location);
+  }
+
+  getPlace() {
+    return localStorage.getItem('page');
   }
 
 }

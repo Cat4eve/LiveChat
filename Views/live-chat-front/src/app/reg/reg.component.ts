@@ -24,10 +24,8 @@ export class RegComponent{
     _password2: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
   })
 
-  constructor(private authService: AuthService, private userService: UserService, private _router: Router) { }
-
-  toLogin(): void {
-    this._router.navigate(['/login']);
+  constructor(private authService: AuthService, private userService: UserService, private _router: Router) {
+    this.authService.setPlace('registration')
   }
 
   emailValidator(regex: RegExp): ValidatorFn {

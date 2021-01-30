@@ -1,0 +1,5 @@
+<div class="nav-menu">
+  <button class="nav-elem" *ngIf="reg" (click)="toReg()">To registration page</button>
+  <button class="nav-elem" *ngIf="login" (click)="toLogin()">To login page</button>
+  <button class="nav-elem" *ngIf="entered" (click)="logout()">Log out</button>
+</div>

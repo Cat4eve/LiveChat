@@ -29,7 +29,7 @@ export class UserTableComponent implements AfterViewInit, OnInit {
     if (value == false) throw new Error('No user in DB.');
     let arr = []
     for (let i = 0; i < value.length; i++){
-      arr.push({online: value[i].online, user: value[i].username, id: value[i]._id});
+      arr.push({online: value[i].online == 1 ? 'online' : 'offline', user: value[i].username, id: value[i]._id});
     }
     this.dataSource = new UserTableDataSource(arr);
     this.dataSource.sort = this.sort;

@@ -21,13 +21,11 @@ export class LoginComponent implements OnInit {
     _password: new FormControl(''),
   })
 
-  constructor(private _userService: UserService , private _authService: AuthService, private _router: Router) { }
-
-  ngOnInit(): void {
+  constructor(private _userService: UserService , private _authService: AuthService, private _router: Router) {
+    this._authService.setPlace('login');
   }
 
-  toReg(): void {
-    this._router.navigate(['/registration'])
+  ngOnInit(): void {
   }
 
   loginSubmit(): void {

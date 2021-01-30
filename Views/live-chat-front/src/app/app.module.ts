@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UserComponent } from './user/user.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UserComponent } from './user/user.component';
     RegComponent,
     CabinetComponent,
     UserTableComponent,
-    UserComponent
+    UserComponent,
+    MenuComponent
    ],
   imports: [
     BrowserModule,
