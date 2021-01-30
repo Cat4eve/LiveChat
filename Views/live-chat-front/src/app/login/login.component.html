@@ -1,7 +1,11 @@
 <!-- <link rel="stylesheet" href="login.component.css"> -->
+<div class="nav-menu">
+  <button class="nav-reg" (click)="toReg()">To registration page</button>
+</div>
+
 <div class="wrapper">
   <h1 class="registration-title">Log in</h1>
-  <p class="registration-description">to join to us.</p>
+  <p class="registration-description">to join us.</p>
   <form action="register" class="registration-wrapper" [formGroup]="_login" (ngSubmit)="loginSubmit()" #form="ngForm">
       <input
           type="text"

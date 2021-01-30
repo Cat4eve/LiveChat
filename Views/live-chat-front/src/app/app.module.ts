@@ -16,6 +16,7 @@ import { UserTableComponent } from './user-table/user-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatSortModule } from '@angular/material/sort';
     LoginComponent,
     RegComponent,
     CabinetComponent,
-    UserTableComponent
+    UserTableComponent,
+    UserComponent
    ],
   imports: [
     BrowserModule,

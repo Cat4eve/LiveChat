@@ -1,20 +1,15 @@
-import { AuthService } from './Auth/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL } from './../../../../config.json';
+import { URL } from './../../config.json';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) { }
 
-  }
-
-  /*getUserByEmail(email): Observable<any> {
-    return this._http.get('')
-  }*/
   getUserFromEmail(email: string): any{
     return this.http.get(`${URL}/users/email/${email}`)
   }
@@ -31,7 +26,15 @@ export class UserService {
     return this.http.get(`${URL}/users/emailandpassword?email=${email}&password=${password}`);
   }
 
+  getAllUsers(): any{
+    return this.http.get(`${URL}/users/all`);
+  }
+
   postFullInfo(userObject: any): any{
     return this.http.post(`${URL}/registration`, userObject);
+  }
+
+  goToUser(user: any): any {
+    this.router.navigate(['chat', {username: user.username, email: user.email, id: user._id}])
   }
 }

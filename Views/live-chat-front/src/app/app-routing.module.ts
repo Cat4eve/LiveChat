@@ -1,3 +1,4 @@
+import { UserComponent } from './user/user.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { LoginGuardGuard } from './Auth/login-guard.guard';
 import { RegComponent } from './reg/reg.component';
@@ -9,9 +10,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegComponent },
-  { path: 'cabinet', component: CabinetComponent, canActivate: [LoginGuardGuard], children: [
-    {path: 'chat'}
-  ]},
+  { path: 'cabinet', component: CabinetComponent, canActivate: [LoginGuardGuard] },
+  { path: 'chat', component: UserComponent, canActivate: [LoginGuardGuard]},
   { path: '', redirectTo: 'cabinet', pathMatch: 'full' },
   { path: '**', redirectTo: 'cabinet', pathMatch: 'full' }
 ];

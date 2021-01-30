@@ -12,14 +12,14 @@ export class AuthService {
     return !!localStorage.getItem('online');
   }
 
-  logOut() {
-    localStorage.removeItem('online');
-    this._router.navigate(['/login']);
+  logIn(user) {
+    localStorage.setItem('user', user);
+    this._router.navigate(['/cabinet']);
   }
 
-  logIn() {
-    localStorage.setItem('online', '1');
-    this._router.navigate(['/cabinet']);
+  logOut() {
+    localStorage.removeItem('user');
+    this._router.navigate(['/login']);
   }
 
 }

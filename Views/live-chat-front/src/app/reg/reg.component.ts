@@ -2,6 +2,7 @@ import { UserService } from './../user.service';
 import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reg',
@@ -23,7 +24,11 @@ export class RegComponent{
     _password2: new FormControl('', [Validators.required, this.passwordValidator(/\d/)]),
   })
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService, private userService: UserService, private _router: Router) { }
+
+  toLogin(): void {
+    this._router.navigate(['/login']);
+  }
 
   emailValidator(regex: RegExp): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} | null => {
@@ -73,8 +78,8 @@ export class RegComponent{
        email: this._registration.get('_email').value,
        password: this._registration.get('_password').value
       }).subscribe(result=> {
-        if (!result.error) {
-          this.authService.logIn();
+        if (result.error && result.code == 11000) {
+          this.authService.logIn(result);
           //@ts-ignore
           swal({
             title: "Successful registration",

@@ -1,7 +1,5 @@
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
-import { Observable, Observer } from 'rxjs';
 import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -28,32 +26,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // emailValidator(regex: RegExp): ValidatorFn {
-  //   return (control: AbstractControl): {[key: string]: any} | null => {
-  //     const forbidden = regex.test(control.value);
-  //     this.isEmailTrue = forbidden;
-  //     return forbidden ? {forbiddenName: {value: control.value}} : null;
-  //   };
-  // }
-
-  // passwordValidator(regex: RegExp): ValidatorFn {
-  //   return (control: AbstractControl): { [key: string]: any } => {
-  //     if (!control.value) {
-  //       return null;
-  //     }
-  //     this.isPasswordTrue = regex.test(control.value);
-  //     return this.isPasswordTrue;
-  //   };
-  // }
-
-  // accValidation(): any {
-  //   return .pipe(
-  //     map(value => {
-  //       if (value == false)
-  //         return this.isEmailExists = false;
-  //       this.isEmailExists = true;
-  //   }))
-  // }
+  toReg(): void {
+    this._router.navigate(['/registration'])
+  }
 
   loginSubmit(): void {
     this._userService.compareEmailAndPassword(
@@ -64,7 +39,7 @@ export class LoginComponent implements OnInit {
       else this.isEmailExists = true;
 
       if (this.isEmailExists) {
-        this._authService.logIn();
+        this._authService.logIn(value);
         this._router.navigate(['/cabinet']);
         return
       }

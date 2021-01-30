@@ -42,19 +42,15 @@ class UserController {
     }
 
     async postRegistrationUser(ctx, next) {
-        console.log('aa');
         let vars = ctx.request.body;
         let len = vars.password.length;
         vars.password = Buffer.alloc(len, vars.password).toString('base64');
-        try {
-            let user = await userModel.addUser(vars, len);
-            ctx.status = 200;
-            ctx.body = user;
-        } catch(e) {
-            ctx.status = 200;
-            ctx.body = {error: 'Dublication error'};
-        }
-        
+        let user = await userModel.addUser(vars, len);
+        console.log(user);
+        ctx.status = 200;
+        ctx.body = user;
+        // ctx.status = 200;
+        // ctx.body = {error: 'Dublication error'};
     }
 }
 

@@ -21,11 +21,13 @@ const UserSchema = new Schema({
     },
     online: {
         required: false,
-        type: Number
+        type: Number,
+        default: 1
     },
     history: {
         required: false,
-        type: Object
+        type: String,
+        default: ""
     }
 });
 
@@ -58,9 +60,8 @@ UserModel.getAllUsers = ()=> {
 }
 
 UserModel.addUser = (userObject, len)=> {
-    let user = new UserModel({username: userObject.username, email: userObject.email, password: userObject.password, passwordLength: len, online: 1, history: []});
+    let user = new UserModel({username: userObject.username, email: userObject.email, password: userObject.password, passwordLength: len});
     return user.save();
-    //return user;
 }
 
 module.exports = UserModel;

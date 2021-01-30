@@ -6,16 +6,10 @@
       <td mat-cell *matCellDef="let row">{{row.online}}</td>
     </ng-container>
 
-    <!-- Nameuser Column -->
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
-      <td mat-cell *matCellDef="let row">{{row.username}}</td>
-    </ng-container>
-
-    <!-- Email Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-      <td mat-cell *matCellDef="let row">{{row.email}}</td>
+    <!-- User Column -->
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+      <td mat-cell *matCellDef="let row" (click)="goToUser(row.id)">{{row.user}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

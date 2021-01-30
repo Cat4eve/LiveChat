@@ -1,26 +1,26 @@
+import { OnInit } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface UserTableItem {
   online: string;
-  username: string;
-  email: string;
+  user: string;
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: UserTableItem[] = [
-  {online: 'online', username: 'Cat4er', email: 'Cat4er@mail.ru'},
-  {online: 'offline', username: 'Dasha', email: 'Dasha@gmail.com'},
-  {online: 'offline', username: 'Artem', email: 'Artem@gmail.com'},
-  {online: 'online', username: 'Maksim', email: 'Max@mail.com'},
-  {online: 'offline', username: 'Alina', email: 'Alina@gmail.com'},
-  {online: 'online', username: 'Vlad', email: 'Vlad@gmail.com'},
-  {online: 'online', username: 'Gosha', email: 'Gosha@gmail.com'},
-];
+// let EXAMPLE_DATA: UserTableItem[] = [
+//   {online: 'online', user: 'Cat4er'},
+//   {online: 'offline', user: 'Dasha'},
+//   {online: 'offline', user: 'Artem'},
+//   {online: 'online', user: 'Maksim'},
+//   {online: 'offline', user: 'Alina'},
+//   {online: 'online', user: 'Vlad'},
+//   {online: 'online', user: 'Gosha'},
+// ];
 
 /**
  * Data source for the UserTable view. This class should
@@ -28,12 +28,17 @@ const EXAMPLE_DATA: UserTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class UserTableDataSource extends DataSource<UserTableItem> {
-  data: UserTableItem[] = EXAMPLE_DATA;
+  data: UserTableItem[] = [];
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor() {
+  constructor(data) {
     super();
+    this.data = data;
+  }
+
+  addData(value: any): void {
+    this.data.push(value);
   }
 
   /**
@@ -83,8 +88,7 @@ export class UserTableDataSource extends DataSource<UserTableItem> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         case 'online': return compare(a.online, b.online, isAsc);
-        case 'username': return compare(a.username, b.username, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
+        case 'user': return compare(a.user, b.user, isAsc);
         default: return 0;
       }
     });
