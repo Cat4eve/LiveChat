@@ -2,8 +2,9 @@ const isConnected = require('./mongoConnect');
 if (!isConnected) throw new Error('db is not connected')
 
 const koa = require('koa');
-const { PORT } = require('./config.json');
-const userRouter = require('./Routes/userRouter')
+// const { PORT } = require('./config.json');
+const userRouter = require('./Routes/userRouter');
+const historyRouter = require('./Routes/historyRouter');
 const koaBody = require('koa-body');
 
 
@@ -20,17 +21,14 @@ const io = require('socket.io')(server, {
 });
 
 let router = new Router();
-router.get('/', ctx => {
-    ctx.response.type = 'html';
-    ctx.response.body = 'hello'
-});
 app.use(koaBody());
 app.use(router.routes());
 app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-    try { 
+    try {
+      console.log(ctx);
       await next();
     }
     catch(err) {
@@ -46,10 +44,11 @@ app.use(async (ctx, next) => {
 })
 
 io.on('connection', socket=> {
-    socket.emit('greet-event', 'Hello');
+  socket.emit('greet-event', socket.id);
 })
-
 
 app.use(userRouter.routes());
 app.use(userRouter.allowedMethods());
+app.use(historyRouter.routes());
+app.use(historyRouter.allowedMethods());
 server.listen(3000, ()=>{console.log('Server is online!')})

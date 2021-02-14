@@ -1,3 +1,4 @@
+import { HistoryService } from './../history.service';
 import { UserService } from './../user.service';
 import { AuthService } from './../Auth/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -12,15 +13,20 @@ import { PORT } from './../../../config.json';
   encapsulation: ViewEncapsulation.None
 })
 export class CabinetComponent implements OnInit {
-
-  socket: any;
-  constructor(private _authService: AuthService, private _userService: UserService) { }
+  height: string
+  socket: any
+  selectedUser: string
+  constructor(private _authService: AuthService, private _userService: UserService, private _histroyService: HistoryService) {
+    this._authService.setPlace('cabinet');
+    this._authService.getUser();
+    this.height = '915px';
+   }
 
   ngOnInit(): void {
-    this.setupSocket();
-    this.socket.on('greet-event', (msg: string)=>{
-      console.log(msg);
-    })
+    // this.setupSocket();
+    // this.socket.on('greet-event', (msg: string)=>{
+    //   console.log(msg);
+    // })
   }
 
   leaveAcc(): void {
@@ -29,6 +35,12 @@ export class CabinetComponent implements OnInit {
 
   goToUser(user: any): void {
     this._userService.getUserFromId(user._id).subscribe(data => this._userService.goToUser(data));
+  }
+
+  selectUser(id: string): any {
+    this.selectedUser = id;
+    console.log(id)
+    this._histroyService.createChannel([this._authService.getUser()._id, this.selectedUser]).subscribe(val => console.log(val))
   }
 
   setupSocket(): void {

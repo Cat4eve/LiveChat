@@ -1,7 +1,8 @@
-<div class="wrapper">
-  <app-user-table></app-user-table>
-</div>
-<div class="personal">
-  <button class = "logout_btn" (click)="leaveAcc()">Log out</button>
-  <!-- <button class = "goto" (click)="goToUser()"></button> -->
+<div class="cab-wrapper">
+  <div class="cab-table-container">
+    <app-user-table (selectUser)="selectUser($event)" class="cab-table"></app-user-table>
+  </div>
+  <div class="msg-container">
+    <app-user [selectedUser]="selectedUser"></app-user>
+  </div>
 </div>

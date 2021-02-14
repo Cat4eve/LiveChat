@@ -1,20 +1,20 @@
 <!-- <link rel="stylesheet" href="login.component.css"> -->
-<div class="wrapper">
-  <h1 class="registration-title">Log in</h1>
-  <p class="registration-description">to join us.</p>
-  <form action="register" class="registration-wrapper" [formGroup]="_login" (ngSubmit)="loginSubmit()" #form="ngForm">
+<div class="login-wrapper">
+  <h1 class="login-registration-title">Log in</h1>
+  <p class="login-registration-description">to join us.</p>
+  <form action="register" class="login-registration-wrapper" [formGroup]="_login" (ngSubmit)="loginSubmit()" #form="ngForm">
       <input
           type="text"
           placeholder="Email"
-          class="reg-input-email"
+          class="login-input-email"
           formControlName="_email"
       />
       <input
           type="password"
           placeholder="Password"
-          class="reg-input-password"
+          class="login-input-password"
           formControlName="_password"
       />
-      <button class="button">Login</button>
+      <button class="login-button">Login</button>
   </form>
 </div>

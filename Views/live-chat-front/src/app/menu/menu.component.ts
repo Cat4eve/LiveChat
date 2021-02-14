@@ -11,6 +11,7 @@ export class MenuComponent implements OnInit {
   entered: boolean
   login: boolean
   reg: boolean
+  chat: boolean
   place: string
 
   constructor(private _router: Router, private _authService: AuthService) {
@@ -18,6 +19,7 @@ export class MenuComponent implements OnInit {
     this.place = this._authService.getPlace();
     this.login = !this.entered && this.place !== 'login';
     this.reg = !this.entered && this.place !== 'registration';
+    this.chat = this.entered && this.place == 'chat';
   }
 
   ngOnInit(): void {
@@ -33,6 +35,10 @@ export class MenuComponent implements OnInit {
 
   logout(): void {
     this._authService.logOut();
+  }
+
+  backToCabinet(): void {
+    this._router.navigate(['/cabinet'])
   }
 
 }

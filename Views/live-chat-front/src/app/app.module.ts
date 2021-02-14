@@ -1,3 +1,4 @@
+import { HistoryService } from './history.service';
 import { LoginGuardGuard } from './Auth/login-guard.guard';
 import { AuthService } from './Auth/auth.service';
 
@@ -18,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UserComponent } from './user/user.component';
 import { MenuComponent } from './menu/menu.component';
+import { MessageComponent } from './message/message.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { MenuComponent } from './menu/menu.component';
     CabinetComponent,
     UserTableComponent,
     UserComponent,
-    MenuComponent
+    MenuComponent,
+    MessageComponent
    ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { MenuComponent } from './menu/menu.component';
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [AuthService, LoginGuardGuard],
+  providers: [AuthService, LoginGuardGuard, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

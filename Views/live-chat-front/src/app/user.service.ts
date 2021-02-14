@@ -35,6 +35,14 @@ export class UserService {
   }
 
   goToUser(user: any): any {
-    this.router.navigate(['chat', {username: user.username, email: user.email, id: user._id}])
+    // this.router.navigate(['chat', {username: user.username, email: user.email, id: user.perm_identity}])
+  }
+
+  setSelectedUser(newUser: any): any {
+    localStorage.setItem('selectedUser', JSON.stringify(newUser._id));
+  }
+
+  getSelectedUser(): any {
+    return JSON.parse(localStorage.getItem('selectedUser'));
   }
 }

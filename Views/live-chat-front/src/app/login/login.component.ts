@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     _password: new FormControl(''),
   })
 
-  constructor(private _userService: UserService , private _authService: AuthService, private _router: Router) {
+  constructor(private _userService: UserService, private _authService: AuthService, private _router: Router) {
     this._authService.setPlace('login');
   }
 
@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
 
       if (this.isEmailExists) {
         this._authService.logIn(value);
-        this._router.navigate(['/cabinet']);
         return
       }
       //@ts-ignore

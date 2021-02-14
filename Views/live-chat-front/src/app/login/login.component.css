@@ -24,11 +24,11 @@ body {
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.wrapper{
+.login-wrapper{
     margin-top: 200px;
 }
 
-.registration-wrapper {
+.login-registration-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,11 +51,11 @@ input::placeholder {
     padding: 30px;
 }
 
-.registration-title{
+.login-registration-title{
     color: white;
     font-size: 50px;
 }
-.registration-description{
+.login-registration-description{
     color: white;
     font-size: 30px;
     letter-spacing: 1.4px;
@@ -68,7 +68,7 @@ input::placeholder {
     --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
 }
 
-.button {
+.login-button {
     margin-top: 30px;
     display: inline-block;
     text-align: center;
@@ -85,7 +85,7 @@ input::placeholder {
     border:none;
 }
 
-.button:hover{
+.login-button:hover{
     transform: scale(1.2);
     cursor: pointer;
 }

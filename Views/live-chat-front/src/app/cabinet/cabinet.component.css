@@ -24,18 +24,25 @@ body {
   );
 }
 
-.wrapper {
-  width: 70%;
+.cab-wrapper {
+  margin-left: 0;
+  width: 100%;
+  height: 815px;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
 }
 
-.personal {
-  margin-top: 20px;
+.cab-table-container {
+  width: 25%;
+  height: 815px;
+
 }
 
-.logout_btn {
-  width: 200px;
-  height: 60px;
-  border-radius: 20px;
-  border: 0.5px solid black;
-}
+.cab-msg-container {
+  width: 75%;
+  height: 815px;
+  background-color: gray;
+  overflow: scroll;
 
+}

@@ -23,22 +23,21 @@ const UserSchema = new Schema({
         required: false,
         type: Number,
         default: 1
-    },
-    history: {
-        required: false,
-        type: String,
-        default: ""
     }
 });
 
 const UserModel = mongoose.model('userschemas', UserSchema);
 
 UserModel.getUserByEmail = (email)=> {
+    console.log('email');
+
     return UserModel.findOne({
         email: email
     });
 }
 UserModel.getUserByUsername = (username)=> {
+    console.log('usr');
+
     return UserModel.findOne({
         username: username
     })
@@ -49,6 +48,7 @@ UserModel.getUserById = (id)=> {
 }
 
 UserModel.compareEmailAndPassword = (email, password)=> {
+    console.log(email, password, 'comp');
     return UserModel.findOne({
         email: email,
         password: password

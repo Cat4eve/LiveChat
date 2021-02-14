@@ -1,8 +1,8 @@
 <!-- <link rel="stylesheet" href="login.component.css"> -->
-<div class="wrapper">
-  <h1 class="registration-title">Registration</h1>
-  <p class="registration-description">register to use our app.</p>
-  <form action="register" class="registration-wrapper" (ngSubmit)="regSubmit()" [formGroup]="_registration" #form="ngForm">
+<div class="reg-wrapper">
+  <h1 class="reg-registration-title">Registration</h1>
+  <p class="reg-registration-description">register to use our app.</p>
+  <form action="register" class="reg-registration-wrapper" (ngSubmit)="regSubmit()" [formGroup]="_registration" #form="ngForm">
       <input
           type="text"
           placeholder="Username"
@@ -27,6 +27,6 @@
           class="reg-input-password"
           formControlName="_password2"
       />
-      <button class="button">Registrate</button>
+      <button class="reg-button">Registrate</button>
   </form>
 </div>

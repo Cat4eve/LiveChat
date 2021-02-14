@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { coerceStringArray } from '@angular/cdk/coercion';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,12 @@ export class AuthService {
     return !!localStorage.getItem('user');
   }
 
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
   logIn(user) {
-    localStorage.setItem('user', user);
+    localStorage.setItem('user', JSON.stringify(user));
     this._router.navigate(['/cabinet']);
   }
 
