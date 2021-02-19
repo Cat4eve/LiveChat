@@ -41,11 +41,13 @@ app.use(async (ctx, next) => {
       ctx.body = { error: err.message || err };
       ctx.app.emit('error', err, ctx); 
     }
+io.on('connection', socket=> {
+  socket.on('createRoom', (roomId, users)=>{
+    socket.join(roomId);
+  })
+})
 })
 
-io.on('connection', socket=> {
-  socket.emit('greet-event', socket.id);
-})
 
 app.use(userRouter.routes());
 app.use(userRouter.allowedMethods());

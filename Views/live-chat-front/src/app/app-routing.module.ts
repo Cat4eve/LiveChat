@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: '**', redirectTo: 'cabinet', pathMatch: 'full' }
 ];
 
+//localhost:4200/
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

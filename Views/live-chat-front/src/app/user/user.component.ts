@@ -1,5 +1,5 @@
 import { UserService } from './../user.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from '../Auth/auth.service';
 import { HistoryService } from '../history.service';
 
@@ -9,19 +9,20 @@ import { HistoryService } from '../history.service';
   styleUrls: ['./user.component.css']
 })
 
-export class UserComponent implements OnInit {
-  @Input() selectedUser: string
+export class UserComponent implements OnInit, OnChanges {
+  @Input() selectedUserId: string
+  selectedUser: any = 'No one'
 
-  // selectedUser: any;
   constructor(private _authService: AuthService, private _userService: UserService, private _historyService: HistoryService) {
-    // this.selectedUser = this._userService.getSelectedUser()
-    console.log(this.selectedUser);
-
-    // if (!this.selectedUser) throw new Error('User not found');
-    // this._authService.setPlace('chat');
-    // this._historyService.createChannel([this._authService.getUser()._id, this.trackUser._id]);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {}
+
+  ngOnChanges(): void {
+    if (this.selectedUserId) {
+      this._userService.getUserFromId(this.selectedUserId).subscribe(user => {
+        this.selectedUser = user;
+      });
+    }
   }
 }

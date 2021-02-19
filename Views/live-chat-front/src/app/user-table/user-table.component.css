@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-/* .mat-elevation-z8 {
-  height: 1000px;
-} */
-
-/* .mat-table {
-  height: 1000px;
-} */
+table {
+  height: 770px;
+}

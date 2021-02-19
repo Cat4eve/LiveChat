@@ -15,7 +15,7 @@ import { PORT } from './../../../config.json';
 export class CabinetComponent implements OnInit {
   height: string
   socket: any
-  selectedUser: string
+  selectedUserId: string
   constructor(private _authService: AuthService, private _userService: UserService, private _histroyService: HistoryService) {
     this._authService.setPlace('cabinet');
     this._authService.getUser();
@@ -23,7 +23,7 @@ export class CabinetComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.setupSocket();
+    this.setupSocket();
     // this.socket.on('greet-event', (msg: string)=>{
     //   console.log(msg);
     // })
@@ -33,14 +33,8 @@ export class CabinetComponent implements OnInit {
     this._authService.logOut();
   }
 
-  goToUser(user: any): void {
-    this._userService.getUserFromId(user._id).subscribe(data => this._userService.goToUser(data));
-  }
-
   selectUser(id: string): any {
-    this.selectedUser = id;
-    console.log(id)
-    this._histroyService.createChannel([this._authService.getUser()._id, this.selectedUser]).subscribe(val => console.log(val))
+    this.selectedUserId = id;
   }
 
   setupSocket(): void {

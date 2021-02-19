@@ -30,19 +30,23 @@ export class UserTableComponent implements AfterViewInit, OnInit {
   constructor(private userService: UserService, private authService: AuthService, private historyService: HistoryService) {}
   async ngOnInit() {
     this.height = '915px';
+    this.ownUser = this.authService.getUser();
     this.getAndPastUsers();
   }
 
   async getAndPastUsers(): Promise<void> {
     let value = await this.userService.getAllUsers().toPromise();
     if (value == false) throw new Error('No user in DB.');
-    value = this.sortUsers(value);
+    // value = this.sortUsers(value);
     let arr = [], counter = parseInt(this.height) - 56.45 - 56;
     for (let i = 0; i < value.length; i++){
       if (counter > 48.27 && this.ownUser._id != value[i]._id) {
         arr.push({online: value[i].online == 1 ? 'online' : 'offline', user: value[i].username, id: value[i]._id});
         counter -= 48.27;
       }
+    }
+    for (let i = counter; i > 170; i -= 48.27) {
+      arr.push({online: '', user: ''})
     }
     this.dataSource = new UserTableDataSource(arr);
     this.dataSource.sort = this.sort;
@@ -54,12 +58,9 @@ export class UserTableComponent implements AfterViewInit, OnInit {
   }
 
   sortUsers(users: any): any {
-
-    this.ownUser = this.authService.getUser();
     this.historyService.getAllChats(this.ownUser).subscribe(chats => {
       this.history = chats;
       for (let chat = 0; chat < chats.length; chat++) {
-        console.log(chats[chat]['users']);
         if (chats[chat]['users'].includes(this.ownUser['_id'])) {
           // for (let user = 0; user < users; user++) {
           //   if (chats[chat]['users'].includes(user['_id'])) {
@@ -76,10 +77,9 @@ export class UserTableComponent implements AfterViewInit, OnInit {
   }
 
   goToUser(id: string): void {
-    // this.userService.getUserFromId(id).subscribe(user => {
-    //   this.userService.setSelectedUser(user);
-    //   this.historyService.createChannel([this.ownUser._id, user._id]);
-    // })
-    this.selectUser.emit(id);
+    if (id != undefined) {
+      this.selectUser.emit(id);
+      this.historyService.createChannel([this.authService.getUser()._id, id]).subscribe(val => console.log(val))
+    }
   }
 }
