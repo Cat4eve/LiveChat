@@ -30,3 +30,51 @@ body {
   height: 100px;
   background-color: #fab1a0;
 }
+
+h1 {
+  line-height: 100px;
+}
+
+.user-msg-content {
+  height: 640px;
+}
+
+input {
+  border: none;
+  margin: 10px;
+  padding: 20px;
+  width: 80%;
+  border-radius: 20px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: static;
+}
+input:focus{
+  transform: scale(1.01);
+}
+input::placeholder {
+  padding: 30px;
+}
+
+.msg-send-button {
+  border: none;
+  margin: 10px;
+  padding: 20px;
+  width: 10%;
+  border-radius: 20px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: static;
+}
+.msg-send-button:hover{
+  transform: scale(1.05);
+}
+.msg-send-button::placeholder {
+  padding: 30px;
+}
+
+.user-msg-form {
+  display: flex;
+}

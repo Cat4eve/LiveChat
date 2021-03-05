@@ -19,7 +19,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { UserComponent } from './user/user.component';
 import { MenuComponent } from './menu/menu.component';
-import { MessageComponent } from './message/message.component';
 
 
 @NgModule({
@@ -31,7 +30,6 @@ import { MessageComponent } from './message/message.component';
     UserTableComponent,
     UserComponent,
     MenuComponent,
-    MessageComponent
    ],
   imports: [
     BrowserModule,

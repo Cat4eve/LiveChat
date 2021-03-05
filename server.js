@@ -28,7 +28,7 @@ app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     try {
-      console.log(ctx);
+      // console.log(ctx);
       await next();
     }
     catch(err) {
@@ -41,13 +41,24 @@ app.use(async (ctx, next) => {
       ctx.body = { error: err.message || err };
       ctx.app.emit('error', err, ctx); 
     }
-io.on('connection', socket=> {
-  socket.on('createRoom', (roomId, users)=>{
-    socket.join(roomId);
-  })
-})
 })
 
+io.on('connection', socket=> {
+  // socket.on('createRoom', (roomId, users)=>{
+  //   socket.join(roomId);
+  // })
+  socket.on('greet-event', (roomId)=>{
+    socket.join(roomId)
+    // users = io.sockets.adapter.rooms.get(roomId[0]);
+    // console.log(Array(users)[0])
+    // console.log(socket.id)
+    // socket.emit('hello', 'hello')
+    socket.to(roomId).emit('hello', 'hello')
+    // socket.to(roomId).on('hello', ()=>{
+    //   socket.emit
+    // })
+  })
+})
 
 app.use(userRouter.routes());
 app.use(userRouter.allowedMethods());

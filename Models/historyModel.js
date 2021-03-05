@@ -39,7 +39,9 @@ HistoryModel.getAllChats = function(orderedFor) {
 }
 
 HistoryModel.createChannel = function(users) {
-    let channel = new HistoryModel({users: users, owner: users.length <= 2 ? null : users[0]});
+    let channel = HistoryModel.findOne({users: users}) == null
+    if (channel) return false;
+    channel = new HistoryModel({users: users, owner: users.length <= 2 ? null : users[0]});
     channel.save();
     return HistoryModel.findOne({users: users});
 }
