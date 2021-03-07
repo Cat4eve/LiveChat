@@ -22,15 +22,14 @@ class HistoryController {
     async createChannel(ctx, next) {
         let vars = ctx.request.body;
         let result = await HistoryModel.createChannel(vars.users);
-        console.log(result, 'smth');
         if (!result) result = false;
         ctx.status = 200;
-        ctx.body = result;
+        ctx.body = result._id;
     }
 
     async addMsg(ctx, next) {
         let vars = ctx.request.body;
-        let result = await HistoryModel.addMsg(vars.channelId, vars.author, vars.message);
+        let result = await HistoryModel.addMsg(vars.channelId);
         if (!result) result = false;
         ctx.status = 200;
         ctx.body = result;

@@ -11,7 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class UserComponent implements OnInit, OnChanges {
-  @Input() selectedUserId: string
+  @Input() selectedUserId: any
   selectedUser: any = 'No one'
   sendMsg = new FormGroup({
     msgControll: new FormControl('')
@@ -24,14 +24,18 @@ export class UserComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if (this.selectedUserId) {
-      this._userService.getUserFromId(this.selectedUserId).subscribe(user => {
+      this.selectedUserId = JSON.parse(this.selectedUserId);
+      this._userService.getUserFromId(this.selectedUserId.userId).subscribe(user => {
         this.selectedUser = user;
       });
     }
   }
 
-  sendMessag() {
-    msg = this.sendMsg.get('msgControll').value
-    // this._historyService
+  sendMessage() {
+    let msg = this.sendMsg.get('msgControll').value;
+    console.log(this.selectedUserId)
+    this.sendMsg.get('msgControll').setValue('')
+    if (!this.selectedUserId || msg == '' || msg.trim() == '') return false;
+    this._historyService.addMsg({channelId: this.selectedUserId.channelId, author: this._authService.getUser(), message: msg}).subscribe(val => {console.log(val)})
   }
 }

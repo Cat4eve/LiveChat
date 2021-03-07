@@ -39,17 +39,23 @@ HistoryModel.getAllChats = function(orderedFor) {
 }
 
 HistoryModel.createChannel = function(users) {
-    let channel = HistoryModel.findOne({users: users}) == null
-    if (channel) return false;
+    let channel = HistoryModel.findOne({users: users})
+    if (channel) return channel;
     channel = new HistoryModel({users: users, owner: users.length <= 2 ? null : users[0]});
     channel.save();
     return HistoryModel.findOne({users: users});
 }
 
-HistoryModel.addMsg = function(channelId, author, message) {
+HistoryModel.addMsg = function(channelId) {
     let historyChannel = HistoryModel.getChatByUserId(channelId);
-    historyChannel.history.push({ msg: message, date: new Date(), author: author });
-    historyChannel.save();
+    // historyChannel.history.push({ msg: message, date: new Date(), author: author });
+    // historyChannel.save();
+    // HistoryModel.findOneAndUpdate({_id: channelId}, {history: })
+    let one = HistoryModel.findOne({_id: channelId})
+    let two = one
+    console.log(two.model.schema.obj)
+    if (!historyChannel) return false;
+    return historyChannel;
 }
 
 module.exports = HistoryModel

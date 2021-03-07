@@ -78,8 +78,7 @@ export class UserTableComponent implements AfterViewInit, OnInit {
 
   goToUser(id: string): void {
     if (id != undefined) {
-      this.selectUser.emit(id);
-      this.historyService.createChannel([this.authService.getUser()._id, id]).subscribe(val => console.log(val))
+      this.historyService.createChannel([this.authService.getUser()._id, id]).subscribe(val => this.selectUser.emit(JSON.stringify({userId: id, channelId: val})));
     }
   }
 }
