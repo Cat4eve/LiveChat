@@ -36,6 +36,6 @@ export class UserComponent implements OnInit, OnChanges {
     console.log(this.selectedUserId)
     this.sendMsg.get('msgControll').setValue('')
     if (!this.selectedUserId || msg == '' || msg.trim() == '') return false;
-    this._historyService.addMsg({channelId: this.selectedUserId.channelId, author: this._authService.getUser(), message: msg}).subscribe(val => {console.log(val)})
+    this._historyService.addMsg({channelId: this.selectedUserId.channelId, author: this._authService.getUser()._id, message: msg}).subscribe(val => {console.log(val)})
   }
 }

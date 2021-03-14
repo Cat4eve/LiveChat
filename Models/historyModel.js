@@ -29,8 +29,12 @@ const HistorySchema = new Schema ({
 
 const HistoryModel = mongoose.model('historyschema', HistorySchema)
 
-HistoryModel.getChatByUserId = function(id) {
-    return HistoryModel.findById(id);
+HistoryModel.getChatByUserId = async function(id) {
+    let res = false;
+    await HistoryModel.findOne({_id: id}, (err, item)=>{
+        if (item) res = item
+    });
+    return res;
 }
 
 HistoryModel.getAllChats = function(orderedFor) {
@@ -46,15 +50,11 @@ HistoryModel.createChannel = function(users) {
     return HistoryModel.findOne({users: users});
 }
 
-HistoryModel.addMsg = function(channelId) {
-    let historyChannel = HistoryModel.getChatByUserId(channelId);
-    // historyChannel.history.push({ msg: message, date: new Date(), author: author });
-    // historyChannel.save();
-    // HistoryModel.findOneAndUpdate({_id: channelId}, {history: })
-    let one = HistoryModel.findOne({_id: channelId})
-    let two = one
-    console.log(two.model.schema.obj)
-    if (!historyChannel) return false;
+HistoryModel.addMsg = async function(channelId, message, author) {
+    let historyChannel = await HistoryModel.getChatByUserId(channelId);
+    historyChannel.history.push({ msg: message, date: new Date(), author: author })
+    let ms = await HistoryModel.findOneAndUpdate({_id: channelId}, {history: historyChannel.history}, {new: true});
+    ms.save();
     return historyChannel;
 }
 

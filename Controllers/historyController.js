@@ -28,8 +28,8 @@ class HistoryController {
     }
 
     async addMsg(ctx, next) {
-        let vars = ctx.request.body;
-        let result = await HistoryModel.addMsg(vars.channelId);
+        let vars = ctx.request.body.options;
+        let result = await HistoryModel.addMsg(vars.channelId, vars.message, vars.author);
         if (!result) result = false;
         ctx.status = 200;
         ctx.body = result;
