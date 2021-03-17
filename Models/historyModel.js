@@ -30,7 +30,7 @@ const HistorySchema = new Schema ({
 const HistoryModel = mongoose.model('historyschema', HistorySchema)
 
 HistoryModel.getChatByUserId = async function(id) {
-    let res = false;
+    let res = null;
     await HistoryModel.findOne({_id: id}, (err, item)=>{
         if (item) res = item
     });
@@ -52,6 +52,7 @@ HistoryModel.createChannel = function(users) {
 
 HistoryModel.addMsg = async function(channelId, message, author) {
     let historyChannel = await HistoryModel.getChatByUserId(channelId);
+    // if (!historyChannel) historyChannel = HistoryModel.createChannel()
     historyChannel.history.push({ msg: message, date: new Date(), author: author })
     let ms = await HistoryModel.findOneAndUpdate({_id: channelId}, {history: historyChannel.history}, {new: true});
     ms.save();
