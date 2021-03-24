@@ -12,6 +12,13 @@ class HistoryController {
         ctx.status = 200;
     }
 
+    async getChatByAllUsers(ctx, next) {
+        let result = await HistoryModel.getChatByAllUsers(ctx.request.body.users);
+        if (!result) result = false;
+        ctx.status = 200;
+        ctx.body = result;
+    }
+
     async getAllChats(ctx, next) {
         let result = await HistoryModel.getAllChats(ctx.params.orderedFor);
         if (!result) result = false;

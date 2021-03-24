@@ -7,10 +7,16 @@ import { URL } from './../../config.json';
 })
 export class HistoryService {
 
+  socket: any
+
   constructor(private http: HttpClient) { }
 
   getChatByUserId(id: string): any {
     return this.http.get(`${URL}/history/user/id/${id}`);
+  }
+
+  getChatByAllUsers(users: any): any {
+    return this.http.post(`${URL}/history/chat`, {users: users});
   }
 
   getAllChats(orderedFor: any = null): any {

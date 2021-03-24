@@ -2,7 +2,16 @@
   <div class="user-header">
     <h1>You are chatting with {{selectedUser.username}}</h1>
   </div>
-  <div class="user-msg-content"></div>
+  <div class="user-msg-content">
+    <div *ngFor="let msg of msgHistory">
+      <ng-template [ngIf]="msg.author == _authService.getUser()._id" [ngIfElse]="another">
+        <div class="msg-content-me">{{msg.msg}}</div>
+      </ng-template>
+      <ng-template #another>
+        <div class="msg-content-another">{{msg.msg}}</div>
+      </ng-template>
+    </div>
+  </div>
   <div class="user-send-msg">
     <form action="sendMessage" [formGroup]="sendMsg" class="user-msg-form">
       <input

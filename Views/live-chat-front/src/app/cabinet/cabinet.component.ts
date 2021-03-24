@@ -24,8 +24,7 @@ export class CabinetComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupSocket();
-    this.socket.emit('greet-event', 'id1313')
-    this.socket.on('hello', (msg)=>{console.log(msg)})
+    this._histroyService.socket = this.socket;
   }
 
   leaveAcc(): void {

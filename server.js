@@ -44,21 +44,24 @@ app.use(async (ctx, next) => {
 })
 
 io.on('connection', socket=> {
-  // socket.on('createRoom', (roomId, users)=>{
-  //   socket.join(roomId);
-  // })
-  socket.on('greet-event', (roomId)=>{
+  socket.on('join', (roomId)=>{
     socket.join(roomId)
-    // users = io.sockets.adapter.rooms.get(roomId[0]);
-    // console.log(Array(users)[0])
-    // console.log(socket.id)
-    // socket.emit('hello', 'hello')
-    socket.to(roomId).emit('hello', 'hello')
-    // socket.to(roomId).on('hello', ()=>{
-    //   socket.emit
-    // })
+    console.log(io.sockets.adapter.rooms.get(roomId))
+  })
+  socket.on('msg', (room)=>{
+    room = JSON.parse(room);
+    socket.emit('getMsg'+room.channelId, room.data);
   })
 })
+
+
+// users = io.sockets.adapter.rooms.get(roomId[0]);
+// console.log(Array(users)[0])
+// console.log(socket.id)
+// socket.emit('hello', 'hello')
+// socket.to(roomId).on('hello', ()=>{
+//   socket.emit
+// })
 
 app.use(userRouter.routes());
 app.use(userRouter.allowedMethods());

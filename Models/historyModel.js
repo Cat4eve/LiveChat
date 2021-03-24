@@ -30,24 +30,26 @@ const HistorySchema = new Schema ({
 const HistoryModel = mongoose.model('historyschema', HistorySchema)
 
 HistoryModel.getChatByUserId = async function(id) {
-    let res = null;
-    await HistoryModel.findOne({_id: id}, (err, item)=>{
-        if (item) res = item
-    });
-    return res;
+    let res = await HistoryModel.findOne({_id: id});
+    if (res) return res;
+}
+
+HistoryModel.getChatByAllUsers = async function(users) {
+    let channel = await HistoryModel.findOne({users: users}) || await HistoryModel.findOne({users: users.reverse()});
+    return channel;
 }
 
 HistoryModel.getAllChats = function(orderedFor) {
     let res = !!orderedFor ? HistoryModel.find({}) : HistoryModel.find({}).sort({last_update: 1});
-    return res
+    return res;
 }
 
-HistoryModel.createChannel = function(users) {
-    let channel = HistoryModel.findOne({users: users})
+HistoryModel.createChannel = async function(users) {
+    let channel = await HistoryModel.findOne({users: users}) || await HistoryModel.findOne({users: users.reverse()});
     if (channel) return channel;
     channel = new HistoryModel({users: users, owner: users.length <= 2 ? null : users[0]});
-    channel.save();
-    return HistoryModel.findOne({users: users});
+    await channel.save();
+    return await HistoryModel.findOne({users: users});
 }
 
 HistoryModel.addMsg = async function(channelId, message, author) {
