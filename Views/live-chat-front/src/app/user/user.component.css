@@ -88,7 +88,7 @@ input::placeholder {
   height: 40px;
   line-height: 40px;
   background-color: #4834d4;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
 }
 
@@ -101,6 +101,6 @@ input::placeholder {
   height: 40px;
   line-height: 40px;
   background-color: #353b48;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
 }

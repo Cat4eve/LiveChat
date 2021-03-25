@@ -50,7 +50,7 @@ io.on('connection', socket=> {
   })
   socket.on('msg', (room)=>{
     room = JSON.parse(room);
-    socket.emit('getMsg'+room.channelId, room.data);
+    socket.emit('getMsg'+room.channelId, JSON.stringify(room));
   })
 })
 

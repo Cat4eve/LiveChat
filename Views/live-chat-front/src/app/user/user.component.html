@@ -8,7 +8,7 @@
         <div class="msg-content-me">{{msg.msg}}</div>
       </ng-template>
       <ng-template #another>
-        <div class="msg-content-another">{{msg.msg}}</div>
+        <div class="msg-content-another">{{msg.msg}} {{msg}}</div>
       </ng-template>
     </div>
   </div>
@@ -20,7 +20,7 @@
         class="user-msg-input"
         formControlName="msgControll"
       />
-      <button class="msg-send-button" (click)="sendMessage()">Send</button>
+      <button class="msg-send-button" [disabled]="!selectedUserId" (click)="sendMessage()">Send</button>
     </form>
   </div>
 </body>

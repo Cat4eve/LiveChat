@@ -29,16 +29,28 @@ export class UserComponent implements OnInit, OnChanges {
       this.selectedUserId = JSON.parse(this.selectedUserId);
       this._userService.getUserFromId(this.selectedUserId.userId).subscribe(user => {
         this.selectedUser = user;
-        // this._historyService.socket.emit('join', this.selectedUserId.channelId);
-        this._historyService.socket.on('getMsg'+this.selectedUserId.channelId, (msg)=>{
-          this.msgHistory.push(msg);
+        this._historyService.socket.on('getMsg'+this.selectedUserId.channelId, (data)=>{
+          data = JSON.parse(data);
+          console.log(data);
+          this.msgHistory.push(data.data);
+          if (data.data.msg.length > 25) {
+            if (this._authService.getUser()._id == data.data.author) {
+              let msgBox: any = document.getElementsByClassName('msg-content-me');
+              msgBox = msgBox[msgBox.length - 1];
+              for (let h = data.data.msg.length; h>25; h-=25) {
+                msgBox.style.height = parseInt(msgBox.style.height) + 40 + 'px';
+                msgBox.style.lineHeight = parseInt(msgBox.style.lineHeight) + 40 + 'px';
+                console.log(msgBox);
+              }
+            }
+            
+          }
         });
       });
       this._historyService.getChatByAllUsers([this._authService.getUser()._id, this.selectedUserId.userId]).subscribe(channel => {
         this.msgHistory = channel.history;
         console.log(channel.history);
       });
-
     }
   }
 
